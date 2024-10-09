@@ -6,24 +6,6 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const setGoodSetter = ()=>{
-    setGood (good+1)
-  }
-   const setBadSetter = ()=>{
-    setBad (bad+1)
-  }
-   const setNeutralSetter = ()=>{
-    setNeutral (neutral+1)
-  }
-
- const Button = ({ handleClick, text }) => { 
-  return (
-    <>
-      <button onClick={handleClick}>{text}</button>
-    </>
-  )
-}
-
   
 
   const Statistics = (props)=>{
@@ -49,9 +31,9 @@ const App = () => {
   return (
     <>
       <h1>Give Feedback</h1>
-      <Button handleClick={setGoodSetter} text="Good" />
-     <Button handleClick={setBadSetter} text="Bad" />
-     <Button handleClick={setNeutralSetter} text="Neutral" />
+      <button onClick={()=>setGood(good+1)}>Good</button>
+      <button onClick ={()=>setNeutral(neutral+1)} >Neutral</button>
+      <button onClick = {()=> setBad(bad+1)}>Bad</button>
       <Statistics 
         good = {good}
         bad = {bad}

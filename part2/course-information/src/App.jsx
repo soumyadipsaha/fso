@@ -26,12 +26,10 @@ const App = () => {
   }
 
   const ExercisesTotal = () => {
-    let exerciseSum = 0
-    for (let i = 0; i < course.parts.length; i++) {
-      exerciseSum += course.parts[i].exercises
-    }
+    
+    const exerciseSum = course.parts.reduce((sum, part) => sum + part.exercises, 0)
 
-    return( <p>Number of exercises {exerciseSum}</p>)
+    return( <p><strong>Total number of exercises {exerciseSum}</strong></p>)
   }
 
   return (

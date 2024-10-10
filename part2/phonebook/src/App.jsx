@@ -8,6 +8,12 @@ const App = () => {
 
   const handleSubmit= (e)=>{
     e.preventDefault()
+
+    if(persons.find(person => person.name === newName)){
+      alert(`${newName} is already in the phonebook`)
+      return
+    }
+
     const addPerson ={
       name: newName,
     }

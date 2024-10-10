@@ -3,6 +3,7 @@ import PersonForm from './Components/PersonForm'
 import Filter from './Components/Filter'
 import Persons from './Components/Persons'
 import axios from 'axios'
+import {createPerson, getAll} from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -12,11 +13,13 @@ const App = () => {
 
 
   useEffect(() => {
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
-      setPersons(response.data)
-    })
+    getAll()
+      .then(response =>{
+        setPersons(response.data)
+      })
+      .catch(error=>{
+        alert("Load data failed")
+      })
   },[])
 
   const handleSubmit= (e)=>{
@@ -34,14 +37,16 @@ const App = () => {
       id: persons.length + 1
     }
 
-    axios
-      .post('http://localhost:3001/persons', addPerson)
+    createPerson(addPerson)
       .then(response=>{
-        setPersons(persons.concat(addPerson))
+        console.log(response)
+         setPersons(persons.concat(response.data))
       })
       .catch(error=>{
-        alert("Operation Failed!")
+        alert("Operation Failed")
       })
+
+
 
 
     

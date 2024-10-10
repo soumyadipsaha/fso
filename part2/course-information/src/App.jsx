@@ -2,6 +2,7 @@ import React from 'react'
 import Course from './components/Course'
 
 const App = () => {
+
   const course = {
     id: 1,
     name: 'Half Stack application development',
@@ -24,7 +25,21 @@ const App = () => {
     ]
   }
 
-  return <Course course={course} />
+  const ExercisesTotal = () => {
+    let exerciseSum = 0
+    for (let i = 0; i < course.parts.length; i++) {
+      exerciseSum += course.parts[i].exercises
+    }
+
+    return( <p>Number of exercises {exerciseSum}</p>)
+  }
+
+  return (
+    <>
+      <Course course={course} />
+      <ExercisesTotal />
+    </>
+  )
 }
 
 export default App

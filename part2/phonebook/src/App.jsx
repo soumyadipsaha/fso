@@ -34,7 +34,17 @@ const App = () => {
       id: persons.length + 1
     }
 
-    setPersons(persons.concat(addPerson))
+    axios
+      .post('http://localhost:3001/persons', addPerson)
+      .then(response=>{
+        setPersons(persons.concat(addPerson))
+      })
+      .catch(error=>{
+        alert("Operation Failed!")
+      })
+
+
+    
     setNewName('')
     setNewNumber('')
   }

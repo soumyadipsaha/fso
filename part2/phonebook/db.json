@@ -1,59 +1,19 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": "1"
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": "2"
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": "3"
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": "4"
-    },
-    {
-      "id": 5,
+      "id": "5",
       "name": "Honky",
       "number": "123"
     },
     {
-      "id": 6,
-      "name": "Bab",
-      "number": "654"
-    },
-    {
-      "id": 7,
+      "id": "7",
       "name": "Forever Young",
       "number": "789"
     },
     {
-      "id": 8,
-      "name": "nnnn",
-      "number": "5"
-    },
-    {
-      "id": 9,
-      "name": "kkkkk",
-      "number": "2222"
-    },
-    {
-      "id": 10,
-      "name": "mriga",
-      "number": "09"
-    },
-    {
-      "id": 11,
-      "name": "kamu",
-      "number": "444"
+      "id": "fe6c",
+      "name": "I want to be",
+      "number": "45645645"
     }
   ]
 }

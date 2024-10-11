@@ -3,7 +3,7 @@ import PersonForm from './Components/PersonForm'
 import Filter from './Components/Filter'
 import Persons from './Components/Persons'
 import axios from 'axios'
-import {createPerson, getAll} from './services/persons'
+import {createPerson, getAll, deletePerson} from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -33,8 +33,7 @@ const App = () => {
 
     const addPerson ={
       name: newName,
-      number: newNumber,
-      id: persons.length + 1
+      number: newNumber
     }
 
     createPerson(addPerson)
@@ -45,10 +44,6 @@ const App = () => {
       .catch(error=>{
         alert("Operation Failed")
       })
-
-
-
-
     
     setNewName('')
     setNewNumber('')
@@ -68,6 +63,23 @@ const App = () => {
 
   }
 
+  const handleDelete = (toDelete)=>{
+  
+    if(!(window.confirm(`Delete ${toDelete.name} ?`))){
+      return
+    }
+    console.log(toDelete)
+
+    deletePerson(toDelete.id)
+      .then(response=>{
+        setPersons(persons.filter(person => person.id !== toDelete.id))
+      })
+      .catch(error=>{
+        alert("Operation Failed")
+      })
+    
+  }
+
   return (
     <div>
 
@@ -84,6 +96,7 @@ const App = () => {
       <Persons 
         persons={persons} 
         filter={filter}
+        handleDelete={handleDelete}
       />
       
     </div>

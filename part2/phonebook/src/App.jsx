@@ -96,11 +96,20 @@ if (existingPerson) {
     deletePerson(toDelete.id)
       .then(response=>{
         setPersons(persons.filter(person => person.id !== toDelete.id))
+        setErrorMessage({error: false, message:`${toDelete.name} deleted successfully`})
+        setTimeout(()=>setErrorMessage(null), 5000)
       })
       .catch(error=>{
-        alert("Operation Failed")
+
+        if(error.response.status === 404){
+          setErrorMessage({error: true, message:`Information of ${toDelete.name} has already been removed from server`})
+          setPersons(persons.filter(person => person.id !== toDelete.id))
+          setTimeout(()=>setErrorMessage(null), 5000)
+          return
+        }
+        setErrorMessage({error: true, message:`Operation Failed`})
+          setTimeout(()=>setErrorMessage(null), 5000)
       })
-    
   }
 
   return (

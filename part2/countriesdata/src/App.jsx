@@ -21,12 +21,16 @@ useEffect(() => {
     })
 },[])
 
+const showCountry = (showThisCountry)=>{
+setFilter(showThisCountry)
+}
+
   return (
     <>
     <div>
-      find countries <input onChange= {e => setFilter(e.target.value)}/>
+      find countries <input value={filter} onChange= {e => setFilter(e.target.value)}/>
     </div>
-    <DisplayResults countriesData={countriesData} filter={filter}/>
+    <DisplayResults countriesData={countriesData} showCountry={showCountry} filter={filter}/>
 
     </>
   )

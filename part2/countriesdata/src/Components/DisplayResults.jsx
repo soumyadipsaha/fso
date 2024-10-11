@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DisplayResults = ({countriesData, filter}) => {
+const DisplayResults = ({countriesData, filter,showCountry}) => {
 
     if(countriesData.length === 0){
         return <div>Loading...</div>
@@ -29,7 +29,9 @@ const DisplayResults = ({countriesData, filter}) => {
         </>)
     }
     else if (filteredResults.length<10){
-        return filteredResults.map(country => <div key={country.name.common}>{country.name.common}</div>)
+        return filteredResults.map(country => 
+        <div key={country.name.common}>{country.name.common} <button onClick={()=>showCountry(country.name.common)}>show</button></div>
+        )
     }
     
 }

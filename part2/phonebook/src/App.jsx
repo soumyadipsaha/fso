@@ -2,14 +2,15 @@ import { useState , useEffect} from 'react'
 import PersonForm from './Components/PersonForm'
 import Filter from './Components/Filter'
 import Persons from './Components/Persons'
-import axios from 'axios'
 import {createPerson, getAll, deletePerson, updatePerson} from './services/persons'
-
+import Notification from './Components/Notification'
+import './App.css'
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
 
 
   useEffect(() => {
@@ -40,7 +41,8 @@ if (existingPerson) {
       setPersons(persons.map(person => 
         person.id === existingPerson.id ? response.data : person
       ))
-      alert(`Replaced ${newName}'s number with ${newNumber}`);
+      setErrorMessage({error: false, message:`${response.data.name} updated successfully`})
+      setTimeout(()=>setErrorMessage(null), 5000)
     })
     .catch(error => {
       alert("Operation Failed");
@@ -57,6 +59,8 @@ if (existingPerson) {
 
     createPerson(addPerson)
       .then(response=>{
+        setErrorMessage({error: false, message:`${response.data.name} added successfully`})
+        setTimeout(()=>setErrorMessage(null), 5000)
         console.log(response)
          setPersons(persons.concat(response.data))
       })
@@ -101,7 +105,7 @@ if (existingPerson) {
 
   return (
     <div>
-
+      <Notification message={errorMessage}/>
       <Filter 
         handleFilterInput={handleFilterInput} 
       />

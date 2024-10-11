@@ -3,7 +3,7 @@ import PersonForm from './Components/PersonForm'
 import Filter from './Components/Filter'
 import Persons from './Components/Persons'
 import axios from 'axios'
-import {createPerson, getAll, deletePerson} from './services/persons'
+import {createPerson, getAll, deletePerson, updatePerson} from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -25,11 +25,30 @@ const App = () => {
   const handleSubmit= (e)=>{
     e.preventDefault()
 
+    const existingPerson = persons.find(person => person.name === newName);
 
-    if(persons.find(person => person.name === newName)){
-      alert(`${newName} is already in the phonebook`)
-      return
-    }
+if (existingPerson) {
+  if (!window.confirm(`${newName} is already in the phonebook, do you want to replace the number?`)) {
+    return;
+  }
+
+  const updatedPerson = { ...existingPerson, number: newNumber };
+
+
+  updatePerson(existingPerson.id, updatedPerson)
+    .then(response => {
+      setPersons(persons.map(person => 
+        person.id === existingPerson.id ? response.data : person
+      ))
+      alert(`Replaced ${newName}'s number with ${newNumber}`);
+    })
+    .catch(error => {
+      alert("Operation Failed");
+    })
+
+  return;
+}
+
 
     const addPerson ={
       name: newName,
